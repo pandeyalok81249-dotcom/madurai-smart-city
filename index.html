@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Smart City Portal</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<!-- Floating Shapes -->
+<div class="floating-shape" style="top:50px;left:100px;"></div>
+<div class="floating-shape" style="top:200px;left:400px;"></div>
+<div class="floating-shape" style="top:400px;left:200px;"></div>
+
+<header>
+<h1>🌍 Smart City Portal – Madurai</h1>
+<p id="welcome"></p>
+<button onclick="logout()">Logout</button>
+</header>
+
+<nav>
+<button onclick="show('dashboard')">Dashboard</button>
+<button onclick="show('complaints')">Complaints</button>
+<button onclick="show('helpline')">Helplines</button>
+<button onclick="show('transport')">Transport</button>
+<button onclick="show('community')">Community</button>
+<button onclick="show('utilities')">Utilities</button>
+<button onclick="show('tools')">Smart Tools</button>
+<button onclick="show('map')">City Map</button>
+</nav>
+
+<!-- Dashboard -->
+<section id="dashboard" class="active">
+<h2>Dashboard</h2>
+<div class="card"><div class="card-inner">🌡 Weather: 29°C | AQI: 78</div></div>
+<div class="card"><div class="card-inner">🚨 Emergency Alerts: None</div></div>
+<div class="card"><div class="card-inner">📰 City News: New Metro Line Soon</div></div>
+<div class="card"><div class="card-inner">
+<canvas id="aqiChart" width="300" height="200"></canvas>
+</div></div>
+</section>
+
+<!-- Complaints -->
+<section id="complaints">
+<h2>Citizen Complaint System</h2>
+<input id="location" placeholder="Location">
+<textarea id="desc" placeholder="Describe Issue"></textarea>
+<select id="category">
+<option>Garbage</option><option>Road Damage</option><option>Water Leakage</option>
+<option>Street Light</option><option>Illegal Dumping</option><option>Noise Pollution</option>
+<option>Air Pollution</option><option>Drain Blockage</option><option>Park Maintenance</option>
+<option>Building Violation</option>
+</select>
+<button onclick="submitComplaint()">Submit Complaint</button>
+<p id="complaintMsg"></p>
+</section>
+
+<!-- Helplines -->
+<section id="helpline">
+<h2>Emergency Helplines</h2>
+<div class="card">👮 Police : 100</div>
+<div class="card">🔥 Fire : 101</div>
+<div class="card">🚑 Ambulance : 102</div>
+<div class="card">🌪 Disaster : 108</div>
+<div class="card">👩 Women : 1091</div>
+<div class="card">👶 Child : 1098</div>
+</section>
+
+<!-- Transport -->
+<section id="transport">
+<h2>Transport</h2>
+<input id="from" placeholder="Start">
+<input id="to" placeholder="Destination">
+<button onclick="route()">Find Route</button>
+<p id="routeResult"></p>
+<div class="card">🚌 Parking Info | Bus Routes | Metro Lines | Traffic Updates</div>
+</section>
+
+<!-- Community -->
+<section id="community">
+<h2>Community Tools</h2>
+<div class="card">🤝 Volunteer Registration</div>
+<div class="card">🩸 Blood Donation Board</div>
+<div class="card">🐾 Lost & Found</div>
+<div class="card">👀 Neighborhood Watch</div>
+</section>
+
+<!-- Utilities -->
+<section id="utilities">
+<h2>City Utilities</h2>
+<div class="card">💡 Electricity / Water Complaint</div>
+<div class="card">🏠 Property Tax Info</div>
+<div class="card">🗑 Garbage Collection Schedule</div>
+</section>
+
+<!-- Smart Tools -->
+<section id="tools">
+<h2>Smart Tools</h2>
+<div class="card">🌙 Dark Mode Toggle</div>
+<div class="card">📅 Event Calendar</div>
+<div class="card">🤖 AI Chatbot Simulation</div>
+</section>
+
+<!-- Map -->
+<section id="map">
+<h2>City Map – Madurai</h2>
+<div class="map-container">
+<iframe width="100%" height="300" style="border:0" loading="lazy" allowfullscreen src="https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&q=Madurai,Tamil+Nadu,India"></iframe>
+</div>
+</section>
+
+<!-- AI Chatbot -->
+<script src="https://vatdi.com/widget.js" data-store-key="YOUR_KEY" async></script>
+<script src="script.js"></script>
+<script>
+// 3D Tilt for Cards
+const cards=document.querySelectorAll('.card');
+cards.forEach(card=>{
+    card.addEventListener('mousemove',e=>{
+        const rect=card.getBoundingClientRect();
+        const x=(e.clientX-rect.left-rect.width/2)/(rect.width/2);
+        const y=(e.clientY-rect.top-rect.height/2)/(rect.height/2);
+        card.style.transform=`rotateY(${x*15}deg) rotateX(${-y*15}deg)`;
+    });
+    card.addEventListener('mouseleave',()=>{card.style.transform='rotateY(0deg) rotateX(0deg)';});
+});
+
+// Dashboard Chart
+
+const ctx=document.getElementById('aqiChart').getContext('2d');
+new Chart(ctx,{
+    type:'bar',
+    data:{
+        labels:['Jan','Feb','Mar','Apr'],
+        datasets:[{label:'Air Quality Index',data:[75,80,65,70],backgroundColor:'rgba(30,127,79,0.7)',borderColor:'rgba(30,127,79,1)',borderWidth:1}]
+    },
+    options:{animation:{duration:1500},scales:{y:{beginAtZero:true}}}
+});
+</script>
+</body>
+</html>
+<section id="maduraiInfo">
+  <h2>About Madurai, Tamil Nadu</h2>
+
+  <div class="city-info-card">
+    <img src="images/madurai-skyline.jpg" alt="Madurai Skyline" class="city-image">
+    <p>
+      Madurai is one of the oldest historical cities in India, located in
+      the state of Tamil Nadu. Known as the “Athens of the East,” it is
+      famous for its rich cultural heritage, the Meenakshi Amman Temple,
+      vibrant markets, and thriving urban life.
+    </p>
+  </div>
+
+  <div class="city-details">
+    <h3>City Details</h3>
+    <ul>
+      <li><strong>State:</strong> Tamil Nadu</li>
+      <li><strong>District:</strong> Madurai</li>
+      <li><strong>Population:</strong> ~1.6 million</li>
+      <li><strong>Famous For:</strong> Meenakshi Amman Temple</li>
+      <li><strong>Transport Hubs:</strong> Madurai Junction Railway Station, MDU Airport</li>
+      <li><strong>Language:</strong> Tamil</li>
+    </ul>
+  </div>
+
+  <div class="map-image-container">
+    <img src="images/madurai-map.jpg" alt="Madurai Map" class="city-map-image">
+  </div>
+</section>
+<section id="maduraiSlider">
+  <h2>Discover Madurai</h2>
+  <div class="slider">
+    <div class="slides">
+      <div class="slide active">
+        <img src="images/madurai-temple1.jpg" alt="Meenakshi Amman Temple">
+        <div class="caption">Meenakshi Amman Temple</div>
+      </div>
+      <div class="slide">
+        <img src="images/madurai-temple2.jpg" alt="Madurai Temple Facade">
+        <div class="caption">Temple Facade</div>
+      </div>
+      <div class="slide">
+        <img src="images/madurai-temple3.jpg" alt="Scenic Temple View">
+        <div class="caption">Scenic Temple View</div>
+      </div>
+    </div>
+    <!-- Navigation buttons -->
+    <button class="prev" onclick="prevSlide()">❮</button>
+    <button class="next" onclick="nextSlide()">❯</button>
+  </div>
+</section>

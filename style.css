@@ -1,0 +1,197 @@
+/* General */
+body{
+  margin:0;font-family:Arial;background:#f0f2f5;overflow-x:hidden;
+}
+
+/* Header */
+header{
+  background:#1e7f4f;color:white;padding:20px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,0.2);
+  position:sticky;top:0;z-index:1000;
+}
+
+/* Navigation */
+nav{
+  background:#222;padding:10px;text-align:center;
+}
+nav button{
+  margin:5px;padding:10px 15px;border:none;background:#1e7f4f;color:white;cursor:pointer;
+  transition:0.3s;border-radius:8px;
+}
+nav button:hover{
+  transform: translateY(-5px) scale(1.05);
+  box-shadow:0 10px 20px rgba(0,0,0,0.3);
+}
+
+/* Sections */
+section{display:none;padding:20px;}
+.active{display:block;transition:all 0.5s ease;}
+.card{
+  background:white;padding:20px;margin:20px;border-radius:15px;
+  box-shadow:0 15px 35px rgba(0,0,0,0.2);
+  transform-style: preserve-3d;transition:transform 0.3s,box-shadow 0.3s;
+}
+.card-inner{
+  transform-style: preserve-3d;transition:transform 0.2s ease;
+}
+.card:hover{
+  box-shadow:0 25px 50px rgba(0,0,0,0.3);
+}
+
+/* Login Box */
+.login-box{
+  background:rgba(255,255,255,0.15);backdrop-filter:blur(15px);padding:40px;border-radius:20px;width:350px;
+  color:white;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,0.3);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  animation: floatLogin 3s infinite alternate;
+}
+@keyframes floatLogin{
+  0%{transform:translate(-50%,-50%) translateY(0px);}
+  100%{transform:translate(-50%,-50%) translateY(-15px);}
+}
+input,textarea,select{display:block;margin:10px 0;padding:10px;width:300px;border-radius:5px;border:1px solid #ccc;}
+button{cursor:pointer;border-radius:5px;}
+
+/* Floating Shapes Background */
+.floating-shape{
+  width:50px;height:50px;background:#1e7f4f;position:absolute;border-radius:10px;
+  animation: float 6s infinite ease-in-out;opacity:0.3;
+}
+@keyframes float{
+  0%{transform:translateY(0px);}
+  50%{transform:translateY(-30px);}
+  100%{transform:translateY(0px);}
+}
+
+/* Map */
+.map-container{margin-top:15px;box-shadow:0 5px 15px rgba(0,0,0,0.2);border-radius:10px;overflow:hidden;}
+
+/* Charts */
+canvas{background:white;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.2);}
+/* Madurai City Info */
+#maduraiInfo{
+  text-align:center;
+  padding:30px;
+  background:#fff;
+  border-radius:12px;
+  margin:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.1);
+}
+
+.city-info-card{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:15px;
+}
+
+.city-image{
+  width:100%;
+  max-width:600px;
+  border-radius:12px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.15);
+}
+
+.city-details{
+  text-align:left;
+  max-width:600px;
+  margin:0 auto;
+}
+
+.city-details ul{
+  list-style:none;
+  padding:0;
+}
+
+.city-details li{
+  margin:8px 0;
+  font-weight:500;
+}
+
+.map-image-container{
+  margin-top:20px;
+}
+
+.city-map-image{
+  width:100%;
+  max-width:600px;
+  border-radius:12px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.15);
+}
+/* Madurai Image Slider */
+#maduraiSlider{
+  padding:40px 20px;
+  background:#f0f2f5;
+  text-align:center;
+  border-radius:15px;
+  margin:20px;
+}
+
+#maduraiSlider h2{
+  font-size:32px;
+  color:#1e7f4f;
+  margin-bottom:20px;
+}
+
+.slider{
+  position:relative;
+  max-width:700px;
+  margin:0 auto;
+  border-radius:15px;
+  overflow:hidden;
+  box-shadow:0 10px 30px rgba(0,0,0,0.2);
+}
+
+.slides{
+  display:flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slide{
+  min-width:100%;
+  position:relative;
+  opacity:0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.slide.active{
+  opacity:1;
+}
+
+.slide img{
+  width:100%;
+  height:400px;
+  object-fit:cover;
+}
+
+.caption{
+  position:absolute;
+  bottom:10px;
+  left:0;
+  width:100%;
+  text-align:center;
+  color:#fff;
+  font-size:20px;
+  background: rgba(0,0,0,0.4);
+  padding:8px 0;
+  border-top:2px solid #1e7f4f;
+}
+
+.prev, .next{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  background:rgba(30,127,79,0.7);
+  color:#fff;
+  border:none;
+  padding:10px 15px;
+  cursor:pointer;
+  border-radius:50%;
+  font-size:18px;
+  transition:0.3s;
+}
+
+.prev:hover, .next:hover{
+  background:rgba(30,127,79,1);
+}
+
+.prev{left:10px;}
+.next{right:10px;}
