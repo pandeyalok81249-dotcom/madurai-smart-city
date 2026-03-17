@@ -42,18 +42,30 @@
 </section>
 
 <!-- Complaints -->
-<section id="complaints">
-<h2>Citizen Complaint System</h2>
-<input id="location" placeholder="Location">
+<section id="complaints" class="section">
+
+<h2>📝 Register Complaint</h2>
+
+<!-- ✅ Complaint Counter -->
+<p style="font-weight:bold;">
+Total Complaints: <span id="count">0</span>
+</p>
+
+<input id="location" placeholder="Enter Location">
 <textarea id="desc" placeholder="Describe Issue"></textarea>
+
 <select id="category">
-<option>Garbage</option><option>Road Damage</option><option>Water Leakage</option>
-<option>Street Light</option><option>Illegal Dumping</option><option>Noise Pollution</option>
-<option>Air Pollution</option><option>Drain Blockage</option><option>Park Maintenance</option>
-<option>Building Violation</option>
+  <option>Garbage</option>
+  <option>Water</option>
+  <option>Road</option>
+  <option>Electricity</option>
 </select>
+
 <button onclick="submitComplaint()">Submit Complaint</button>
+
 <p id="complaintMsg"></p>
+
+</section>
 </section>
 
 <!-- Helplines -->
@@ -97,16 +109,37 @@
 <!-- Smart Tools -->
 <section id="tools">
 <h2>Smart Tools</h2>
-<div class="card">🌙 Dark Mode Toggle</div>
+<div class="card">
+🌙 Dark Mode Toggle  
+<br><br>
+<button onclick="toggleDarkMode()">Toggle Mode</button>
+</div>
 <div class="card">📅 Event Calendar</div>
 <div class="card">🤖 AI Chatbot Simulation</div>
 </section>
 
 <!-- Map -->
 <section id="map">
-<h2>City Map – Madurai</h2>
-<div class="map-container">
-<iframe width="100%" height="300" style="border:0" loading="lazy" allowfullscreen src="https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&q=Madurai,Tamil+Nadu,India"></iframe>
+<h2>🌍 Madurai 3D City Map</h2>
+
+<div class="map3d">
+<iframe
+
+width="100%"
+height="350"
+style="border:0; border-radius:15px;"
+loading="lazy"
+allowfullscreen
+src="https://www.google.com/maps?q=Madurai,Tamil+Nadu&output=embed&z=12&t=k">
+</iframe>
+</div>
+
+<p style="text-align:center;margin-top:10px;">
+🛰 Satellite 3D View of Madurai City
+</p>
+
+</section>
+
 </div>
 </section>
 
@@ -138,6 +171,220 @@ new Chart(ctx,{
     options:{animation:{duration:1500},scales:{y:{beginAtZero:true}}}
 });
 </script>
+<!-- SMART MADURAI AI CHATBOT -->
+
+<div id="aiBtn">🤖</div>
+
+<div id="aiChat">
+<div id="aiHeader">
+Madurai AI
+<span onclick="closeAI()">❌</span>
+</div>
+
+<div id="chatArea"></div>
+<div id="profileBtn" onclick="toggleProfile()">👤</div>
+<div id="profileBox">
+
+<h3>User Profile</h3>
+
+<img id="profileImg" src="" class="profile-img">
+
+<p>Name: <span id="pname"></span></p>
+<p>Phone: <span id="pphone"></span></p>
+<p>Email: <span id="pemail"></span></p>
+
+<input id="newName" placeholder="Enter Name">
+<input id="newPhone" placeholder="Enter Phone">
+<input id="newEmail" placeholder="Enter Email">
+
+<button onclick="saveProfile()">Save</button>
+
+<h4>Choose Avatar</h4>
+
+<div class="avatar-list">
+<img src="https://api.dicebear.com/7.x/adventurer/svg?seed=1" onclick="setAvatar(this.src)">
+<img src="https://api.dicebear.com/7.x/adventurer/svg?seed=2" onclick="setAvatar(this.src)">
+<img src="https://api.dicebear.com/7.x/adventurer/svg?seed=3" onclick="setAvatar(this.src)">
+<img src="https://api.dicebear.com/7.x/adventurer/svg?seed=4" onclick="setAvatar(this.src)">
+<img src="https://api.dicebear.com/7.x/adventurer/svg?seed=5" onclick="setAvatar(this.src)">
+<img src="https://api.dicebear.com/7.x/adventurer/svg?seed=6" onclick="setAvatar(this.src)">
+<img src="https://api.dicebear.com/7.x/adventurer/svg?seed=7" onclick="setAvatar(this.src)">
+<img src="https://api.dicebear.com/7.x/adventurer/svg?seed=8" onclick="setAvatar(this.src)">
+<img src="https://api.dicebear.com/7.x/adventurer/svg?seed=9" onclick="setAvatar(this.src)">
+<img src="https://api.dicebear.com/7.x/adventurer/svg?seed=10" onclick="setAvatar(this.src)">
+</div>
+
+<button onclick="toggleProfile()">❌ Close</button>
+
+</div>
+
+
+<div id="aiInput">
+<input id="userText" placeholder="Ask about Madurai...">
+<button onclick="sendMsg()">Send</button>
+</div>
+</div>
+
+<style>
+#aiBtn{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#1e7f4f;
+color:white;
+width:50px;
+height:50px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:22px;
+cursor:pointer;
+z-index:9999;
+}
+
+#aiChat{
+display:none;
+position:fixed;
+bottom:80px;
+right:20px;
+width:260px;
+height:320px;
+background:white;
+border-radius:10px;
+box-shadow:0 0 15px rgba(0,0,0,0.3);
+display:flex;
+flex-direction:column;
+overflow:hidden;
+z-index:9999;
+}
+
+#aiHeader{
+background:#1e7f4f;
+color:white;
+padding:10px;
+display:flex;
+justify-content:space-between;
+}
+
+#chatArea{
+flex:1;
+padding:10px;
+overflow-y:auto;
+font-size:13px;
+}
+
+.user{
+text-align:right;
+margin:5px;
+background:#dcf8c6;
+padding:6px;
+border-radius:8px;
+}
+
+.bot{
+text-align:left;
+margin:5px;
+background:#eee;
+padding:6px;
+border-radius:8px;
+}
+
+#aiInput{
+display:flex;
+border-top:1px solid #ccc;
+}
+
+#aiInput input{
+flex:1;
+padding:6px;
+border:none;
+}
+
+#aiInput button{
+background:#1e7f4f;
+color:white;
+border:none;
+padding:6px;
+}
+</style>
+
+<script>
+
+document.getElementById("aiBtn").onclick=function(){
+document.getElementById("aiChat").style.display="flex";
+}
+
+function closeAI(){
+document.getElementById("aiChat").style.display="none";
+}
+
+function sendMsg(){
+
+let input=document.getElementById("userText");
+let text=input.value.toLowerCase();
+if(text==="") return;
+
+let chat=document.getElementById("chatArea");
+
+// user message
+chat.innerHTML += "<div class='user'>"+text+"</div>";
+
+let reply="";
+
+// KNOWLEDGE BASE (large)
+if(text.includes("madurai")){
+reply="Madurai is one of the oldest cities in India, located in Tamil Nadu.";
+}
+else if(text.includes("temple")){
+reply="Meenakshi Amman Temple is the most famous temple in Madurai.";
+}
+else if(text.includes("history")){
+reply="Madurai has a rich history ruled by Pandya kings.";
+}
+else if(text.includes("food")){
+reply="Madurai is famous for Jigarthanda, parotta, and street food.";
+}
+else if(text.includes("transport")){
+reply="Madurai has buses, railway station and airport connectivity.";
+}
+else if(text.includes("airport")){
+reply="Madurai Airport connects to major Indian cities.";
+}
+else if(text.includes("railway")){
+reply="Madurai Junction is a major railway station.";
+}
+else if(text.includes("weather")){
+reply="Madurai has hot climate with temperatures often above 30°C.";
+}
+else if(text.includes("tourist")){
+reply="Tourist places: Meenakshi Temple, Thirumalai Nayakkar Palace, Gandhi Museum.";
+}
+else if(text.includes("college")){
+reply="Madurai has many colleges like Madurai Kamaraj University.";
+}
+else if(text.includes("hospital")){
+reply="Major hospitals include Government Rajaji Hospital.";
+}
+else if(text.includes("shopping")){
+reply="Madurai is famous for textile markets and street shopping.";
+}
+else if(text.includes("festival")){
+reply="Chithirai Festival is the most famous festival in Madurai.";
+}
+else{
+reply="I am Madurai Smart AI. Ask about temples, transport, food, tourism, etc.";
+}
+
+// bot reply
+chat.innerHTML += "<div class='bot'>"+reply+"</div>";
+
+chat.scrollTop = chat.scrollHeight;
+input.value="";
+}
+
+</script>
+
 </body>
 </html>
 <section id="maduraiInfo">
